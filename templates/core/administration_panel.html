@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+        <section id="catalogue">
+               <div class="car-card">
+                    <div class="image-wrap">
+                        <img src="{% static 'images/create car.jpg' %}">
+                    </div>
+
+                    <div class="details-buttons">
+
+                        <a href="{% url 'car create' %}" class="details-btn">Create car</a>
+                    </div>
+                </div>
+               <div class="car-card">
+                    <div class="image-wrap">
+                        <img src="{% static 'images/promotion.png' %}">
+                    </div>
+
+                    <div class="details-buttons">
+
+                        <a href="{% url 'promo periods' %}" class="details-btn">Promos</a>
+                    </div>
+                </div>
+                <div class="car-card">
+                    <div class="image-wrap">
+                        <img src="{% static 'images/preparation.jpg' %}">
+                    </div>
+
+                    <div class="details-buttons">
+
+                        <a href="{% url 'preparation periods' %}" class="details-btn">Preparation</a>
+                    </div>
+                </div>
+
+        </section>
+
+{% endblock %}

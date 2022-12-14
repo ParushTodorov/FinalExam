@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+  <section id="delete-page" class="auth">
+
+      <div class="container">
+        <h1>Are you sure you want to delete your profile?</h1>
+
+        <form id='delete' action="{% url 'profile delete' pk=request.user.pk %}" method="post">
+
+            {{ form }}
+            {% csrf_token %}
+
+            <input class="btn submit" type="submit" value="Yes">
+
+        </form>
+
+      </div>
+
+      <a class="delete-button" href="javascript:history.back()">Go Back</a>
+
+  </section>
+
+{% endblock %}

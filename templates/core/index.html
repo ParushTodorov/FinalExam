@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+
+
+
+        <div class="index-message">
+            <h2>{{ promo }}</h2>
+        </div>
+
+
+    <section id="index-headline">
+        <div class="index-message">
+            <h2>Our <span><a href="{% url 'catalogue' %}">cars</a></span> collection is expecting you!</h2>
+            <h2>Check for your<span><a href="{% url 'check for cars' %}">dates</a></span></h2>
+        </div>
+        <img src="{% static 'images/car-index.png' %}" alt="car">
+    </section>
+{% endblock %}

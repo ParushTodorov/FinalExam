@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_content %}
+
+    <section id="car-details">
+        <h1>Profile Details</h1>
+        <div class="info-section">
+            <div class="car-header">
+                {% if not user.photo %}
+                    <img class="car-img" src="{% static 'images/default-profile.png' %}" alt='profile-image'/>
+                {% else %}
+                    <img class="car-img" src="{{ user.photo.url }}" alt='profile-image'/>
+                {% endif %}
+                <div>
+                {% if user.first_name or user.last_name %}
+                <p class="description">Name: {{ user.get_fullname }}</p>
+                {% endif %}
+
+                <p class="description">Username: {{ user.username }}</p>
+
+                <p class="description">Email: {{ user.email }}</p>
+
+                <p class="description">Age: {{ user.age }}</p>
+                {% if user.city %}
+                <p class="description">City: {{ user.city }}</p>
+                {% else %}
+                <p class="description">City: n/a</p>
+                {% endif %}
+                {% if user.phone_number %}
+                <p class="description">Phone: {{ user.phone_number }}</p>
+                {% else %}
+                <p class="description">Phone: n/a</p>
+                {% endif %}
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="buttons">
+                    <a href="{% url 'profile edit' pk=pk %}" class="edit-button">Edit</a>
+                    <a href="{% url 'profile delete' pk=pk %}" class="delete-button">Delete</a>
+                    <a href="{% url 'profile rented cars' pk=request.user.pk %}" class="rent-button">Rented Cars</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
+

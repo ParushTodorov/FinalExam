@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+
+{% block page_content %}
+
+    <section id="delete-page" class="auth">
+        <form id="delete" action="{% url 'delete promo period' pk=pk %}" method="post">
+            <div class="container">
+
+                <h1>Delete Period</h1>
+
+                {{ form }}
+                {% csrf_token %}
+
+                <input class="btn submit" type="submit" value="Delete Period">
+
+            </div>
+        </form>
+    </section>
+
+
+{% endblock %}
+

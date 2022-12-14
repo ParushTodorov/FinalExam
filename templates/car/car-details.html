@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_content %}
+
+    <section id="car-details">
+        <h1>Car Details</h1>
+        <div class="info-section">
+            <div class="car-header">
+
+
+                {% if car.photo %}
+                <div class="image-wrap">
+                    <img class="car-img" src="{{ object.photo.url }}" alt='car image'/>
+                </div>
+                {% else %}
+                    <img class="car-img" src="{% static 'images/basic car.jpg' %}" alt='profile-image'/>
+                {% endif %}
+
+                <h1>{{ object.model }}</h1>
+
+                <p><span class="description">Type: {{ object.type }}</span></p>
+
+                <p><span class="description">Year: {{ object.year }}</span></p>
+
+                <p><span class="description">Fuel: {{ object.fuel }}</span></p>
+
+                <p><span class="description">Price: {{ object.price_per_day }}</span></p>
+            </div>
+
+
+            <div class="buttons">
+
+                {% if request.user.is_staff %}
+                <a href="{% url 'car edit' pk=object.pk%}" class="edit-button">Edit</a>
+                <a href="{% url 'car delete' pk=object.pk%}" class="delete-button">Delete</a>
+                {% endif %}
+                <a href="{% url 'rent_a_car' pk=object.pk%}" class="rent-button">Rent A Car</a>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

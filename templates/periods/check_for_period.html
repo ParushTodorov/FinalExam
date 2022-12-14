@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block page_content %}
+
+    <section id="create-page" class="auth">
+
+        <form id="create" action="{% url 'check for cars' %}" method="post">
+            <div class="container">
+                <h1 class="form-create-headline">Look for periods</h1>
+
+                {{ form }}
+                {% if form.city == 'Other'%}
+                    {{ form.city }}
+                {% endif %}
+                {% csrf_token %}
+
+                <input class="btn" type="submit" value="Show cars">
+            </div>
+        </form>
+    </section>
+
+
+{% endblock %}
+
