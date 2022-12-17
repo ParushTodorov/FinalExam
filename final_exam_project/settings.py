@@ -57,7 +57,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'final_exam_project.wsgi.application'
 
 DATE_INPUT_FORMATS = ['%Y-%m-%d']
-
+#
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
@@ -70,7 +70,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',
-        'USER': 'postgres-user',
+        'USER': 'postgres',
         'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '5432',

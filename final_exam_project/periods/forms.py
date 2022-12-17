@@ -10,11 +10,11 @@ from final_exam_project.periods.models import PeriodForRent, PeriodForPromo, Per
 
 class CheckForFreeCarsInPeriodForm(forms.ModelForm):
     start_date = forms.DateField(
-        input_formats=settings.DATE_INPUT_FORMATS
+        input_formats=settings.DATE_INPUT_FORMATS,
     )
 
     end_date = forms.DateField(
-        input_formats=settings.DATE_INPUT_FORMATS
+        input_formats=settings.DATE_INPUT_FORMATS,
     )
 
     def __init__(self, *args, **kwargs):
@@ -27,6 +27,7 @@ class CheckForFreeCarsInPeriodForm(forms.ModelForm):
         fields = ['start_date', 'end_date', 'province']
 
     def clean(self):
+        cleaned_data = self.cleaned_data
         self.validate_unique()
         if not self.is_valid():
             return
@@ -34,11 +35,13 @@ class CheckForFreeCarsInPeriodForm(forms.ModelForm):
         start_date = self.cleaned_data['start_date']
         end_date = self.cleaned_data['end_date']
 
-        if start_date < datetime.date.today():
+        if self.cleaned_data['start_date'] < datetime.date.today():
             raise ValidationError('The date cannot be in the past!')
 
         if start_date > end_date:
             raise ValidationError('Start date must be before end date!')
+
+        return cleaned_data
 
 
 class RentPeriodCreateForm(CheckForFreeCarsInPeriodForm):
@@ -70,16 +73,13 @@ class RentPeriodCreateForm(CheckForFreeCarsInPeriodForm):
             raise ValidationError(f'{self.cleaned_data["car"].model} is rented for period '
                                   f'from {self.cleaned_data["start_date"]} to {self.cleaned_data["end_date"]}')
 
-    def clean_total_price(self):
         total_price = calculate_price(
             self.cleaned_data['start_date'],
             self.cleaned_data['end_date'],
             self.cleaned_data['car']
         )
 
-        data = total_price
-
-        return data
+        self.cleaned_data['total_price'] = total_price
 
 
 class PeriodForPromoForm(CheckForFreeCarsInPeriodForm):

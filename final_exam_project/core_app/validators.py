@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 
 from django.core.exceptions import ValidationError
 from django.utils.deconstruct import deconstructible
@@ -14,11 +14,6 @@ class ValueInRangeValidator:
     def __call__(self, value):
         if value < self.min_value or self.max_value < value:
             raise ValidationError(self.message)
-
-
-def date_bigger_than_today(date):
-    if date < datetime.today():
-        raise ValidationError("The date cannot be in the past!")
 
 
 def validate_only_letters(value):

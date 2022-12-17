@@ -53,6 +53,7 @@ class UserRentedCars(views.ListView):
     template_name = 'profile/profile-rented-cars.html'
     model = PeriodForRent
     paginate_by = 10
+    ordering = 'start_date'
 
     def get(self, request, *args, **kwargs):
         if not self.request.user.pk == self.kwargs['pk']:
@@ -63,7 +64,7 @@ class UserRentedCars(views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        context['object_list'] = PeriodForRent.objects.filter(user_id=self.kwargs['pk'])
+        context['object_list'] = PeriodForRent.objects.filter(user_id=self.kwargs['pk']).order_by(self.ordering)
         context['date_now'] = datetime.now().date()
 
         return context

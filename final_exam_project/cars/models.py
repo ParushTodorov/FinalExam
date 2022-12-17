@@ -13,6 +13,8 @@ class Cars(models.Model):
     YEAR_MAX_VALUE = 2049
     FUEL = ["Gasoline", "Diesel", "LPG", "Electric"]
     PRICE_MIN_VALUE = 1
+    PASSENGERS_MIN = 1
+    PASSENGERS_MAX = 6
 
     type = models.CharField(
         blank=False,
@@ -34,7 +36,14 @@ class Cars(models.Model):
         blank=False,
         null=False,
         validators=(
-            ValueInRangeValidator(YEAR_MIN_VALUE, YEAR_MAX_VALUE, message='Year must be between 1980 and 2049'),
+            ValueInRangeValidator(YEAR_MIN_VALUE, YEAR_MAX_VALUE, message=f'Year must be between {YEAR_MIN_VALUE} and {YEAR_MAX_VALUE}'),
+        ),
+    )
+    passengers = models.PositiveIntegerField(
+        blank=False,
+        null=False,
+        validators=(
+            ValueInRangeValidator(PASSENGERS_MIN, PASSENGERS_MAX, message=f'Passengers must be between {PASSENGERS_MIN} and {PASSENGERS_MAX}'),
         ),
     )
 

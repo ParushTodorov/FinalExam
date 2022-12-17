@@ -167,6 +167,7 @@ class PeriodForPromoList(views.ListView):
     template_name = 'periods/../../templates/periods-admin/period-for-promo-list.html'
     model = PeriodForPromo
     paginate_by = 10
+    ordering = ['start_date']
 
     def get(self, request, *args, **kwargs):
         if not self.request.user.is_staff:

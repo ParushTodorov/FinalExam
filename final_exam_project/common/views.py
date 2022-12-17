@@ -8,8 +8,8 @@ from final_exam_project.periods.models import PeriodForPromo
 
 def index(request):
     promo = PeriodForPromo.objects\
-        .filter(start_date__gte=datetime.now().date())\
-        .filter(end_date__lte=datetime.now().date())
+        .filter(end_date__gte=datetime.now().date())\
+        .filter(start_date__lte=datetime.now().date())\
 
     if not promo:
         return render(request, 'core/index.html')

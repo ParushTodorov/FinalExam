@@ -8,8 +8,8 @@
             <div class="car-header">
 
 
-                {% if car.photo %}
-                <div class="image-wrap">
+                {% if object.photo %}
+                <div>
                     <img class="car-img" src="{{ object.photo.url }}" alt='car image'/>
                 </div>
                 {% else %}
@@ -22,9 +22,11 @@
 
                 <p><span class="description">Year: {{ object.year }}</span></p>
 
+                <p><span class="description">Passengers: {{ object.passengers }}</span></p>
+
                 <p><span class="description">Fuel: {{ object.fuel }}</span></p>
 
-                <p><span class="description">Price: {{ object.price_per_day }}</span></p>
+                <p><span class="description">Price per day: {{ object.price_per_day }}</span></p>
             </div>
 
 

@@ -1,5 +1,5 @@
 import datetime
-
+from datetime import datetime as dt
 from final_exam_project.cars.models import Cars
 from final_exam_project.periods.models import PeriodForRent, PeriodForPromo, PeriodForPreparation
 
@@ -40,29 +40,16 @@ def check_is_car_free(start_date, end_date, province, car):
 
 
 def calculate_price(sd, ed, car):
-    price = 0
+    price = ((datetime.date(ed.year, ed.month, ed.day) - datetime.date(sd.year, sd.month, sd.day)).days + 1) * \
+            car.price_per_day
     days = (datetime.date(ed.year, ed.month, ed.day) - datetime.date(sd.year, sd.month, sd.day)).days + 1
 
-    promo_periods = PeriodForPromo.objects\
-        .filter(start_date__lte=ed) \
-        .filter(end_date__gte=sd)\
-
-    if not promo_periods:
-        price = ((datetime.date(ed.year, ed.month, ed.day) - datetime.date(sd.year, sd.month, sd.day)).days + 1) * \
-                car.price_per_day
-
-        return price
-
-    for x in range(days):
-        date = sd + datetime.timedelta(x)
-        discount = 0
-
-        for period in promo_periods:
-            if period.start_date <= date <= period.end_date:
-                discount = period.discount
-                break
-
-        price += car.price_per_day * (100 - discount) / 100
+    promo = PeriodForPromo.objects\
+        .filter(end_date__gte=dt.now().date())\
+        .filter(start_date__lte=dt.now().date())
+    
+    if promo:
+        price *= (100 - promo[0].discount) / 100
 
     return price
 

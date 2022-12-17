@@ -33,6 +33,7 @@ class AppUserAdmin(auth_admin.UserAdmin):
                     'last_name',
                     'age',
                     'city',
+                    'phone_number'
                 ),
             },
         ),

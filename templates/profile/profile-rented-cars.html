@@ -105,7 +105,9 @@
                     {{ rented_car.address }}
                 </td>
                 <td>
+                    <a href="{% url 'car details' rented_car.car.pk %}">
                     {{ rented_car.car }}
+                    </a>
                 </td>
                 <td>
                     {{ rented_car.total_price }} lv
